@@ -92,11 +92,21 @@ function renderStatus(statusText) {
   document.getElementById('status').textContent = statusText;
 }
 
+function checkFacebook(url){
+  //Aca faltan mas validaciones para saber que 
+  //estan todas las condiciones dadas para ejecutar
+  if (url.indexOf("facebook.com/") == -1) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
     // Put the image URL in Google search.
-    renderStatus('Performing Google Image search for ' + url);
-	if (url.indexOf("facebook.com") == -1) {
+    renderStatus('Identificando URL');
+	if (checkURL(url)) {
 		renderStatus('Ingrese a Facebook para activar el script')
 	} else {
 
