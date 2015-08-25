@@ -96,6 +96,9 @@ document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
     // Put the image URL in Google search.
     renderStatus('Performing Google Image search for ' + url);
+	if (url.indexOf("facebook.com") == -1) {
+		renderStatus('Ingrese a Facebook para activar el script')
+	} else {
 
     getImageUrl(url, function(imageUrl, width, height) {
 
@@ -114,5 +117,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }, function(errorMessage) {
       renderStatus('Cannot display image. ' + errorMessage);
     });
+  }
   });
 });
