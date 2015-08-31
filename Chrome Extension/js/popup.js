@@ -55,11 +55,9 @@ function renderStatus(statusText) {
 function checkFacebook(url){
   //Aca faltan mas validaciones para saber que 
   //estan todas las condiciones dadas para ejecutar
-  if (url.indexOf("facebook.com/") == -1) {
-    return true;
-  } else {
-    return false;
-  }
+  //TODO: más adelante se va a abstraer el sitio en un objeto especial que va a tener una regexp
+  //      adentro junto con un callback para bindear los objetos
+  return (url.indexOf("facebook.com/") == -1);
 }
 
 document.addEventListener('DOMContentLoaded', function() {
