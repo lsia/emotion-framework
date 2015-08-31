@@ -64,12 +64,12 @@ function checkFacebook(url){
 
 document.addEventListener('DOMContentLoaded', function() {
   getCurrentTabUrl(function(url) {
-    // Put the image URL in Google search.
-  renderStatus('Identificando URL' + url);
-	if (checkFacebook(url)) {
-		renderStatus('Ingrese a Facebook para activar el script')
-	} else {
-    renderStatus('Usted esta en Facebook')
-  }
-  });
+	    // Put the image URL in Google search.
+	  	renderStatus('Identificando URL' + url);
+		if (checkFacebook(url)) {
+			renderStatus('Ingrese a Facebook para activar el script')
+		} else {
+	    renderStatus('Usted esta en Facebook')
+	 	}
+  	});
 });
