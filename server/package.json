@@ -1,0 +1,16 @@
+{
+  "name": "lsia.app",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ejs": "*",
+    "express": "3.3.5",
+    "multer": "^1.0.3",
+    "passport": "*",
+    "pg": "*",
+    "synchronize": "*"
+  }
+}
