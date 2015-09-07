@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+			<html lang="en">
+				<head>
+					<meta charset="utf-8" />
+					<meta name="viewport" content="width=device-width, initial-scale=1.0">
+			<title>Página principal - Demo</title>
+<link rel="shortcut icon" href="/design/common/cloo.png">
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/klf.js" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+
+$(function(){
+console.log("hy");
+
+//utilización
+
+// flush_function=new Keylogger($selector,callback(text_stroke,key_stroke));
+// Donde callback se ejecutara al ser ejecutada flush_function() y devolverá text_stroke y key_stroke que son dos formatos de keylog
+// El formato text_stroke (experimental) permite a simple vista ver textos eliminados y el formato key_stroke es más complejo y captura
+// todas las teclas con metainformación de la posición y tiempos.
+
+
+var flush=new Keylogger($('textarea'),function(a,b){
+	$('.txt').html(a);
+	$('.kl').text(b);
+});
+$('button').on('click',function(){
+	flush();
+});
+
+
+});
+
+</script>
+			</head>
+
+<body>
+
+
+<textarea>
+</textarea>
+
+<button>Ok</button>
+
+
+<p class="txt"></p>
+<p class="kl"></p>
+
+</body>
+</html>
