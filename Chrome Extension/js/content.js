@@ -39,6 +39,36 @@ $(document).ready(function() {
 		.prepend(logger);
 
 	$("#chat-logger").load(chrome.extension.getURL("html/chat-logger.html"));
+
+	//-------------------Detectar nueva ventana de conversacion------------------//
+	var target = $(".fbNubGroup")[0]; // Class del nodo a monitorear
+	
+	//Crea una nueva instancia del observer de cambios
+	var observer = new MutationObserver(function( mutations ) {
+		mutations.forEach(function( mutation ) {
+			var newNodes = mutation.addedNodes; // DOM NodeList
+			if( newNodes !== null  && newNodes.length > 0) { // Si se agregaron nuevos nodos
+				var $nodes = $( newNodes );
+				$nodes.each(function() { 
+					var node = $( this )[0];
+					//Chequeo que este creada la clase de la ventana "conversacion"
+					if(node.tagName !== undefined && node.getElementsByClassName("titlebarTextWrapper").length != 0){
+						var elem = node.getElementsByClassName("titlebarTextWrapper")[0];
+						if(elem.tagName == "H4"){
+							console.log( "Se inicia una nueva conversacion" );
+						}
+					}
+				});
+			}
+		});    
+	});
+	//Campos a observar del target
+	observer.observe(target, {
+		attributes: true,
+		childList: true,
+		subtree: true
+	});
+	//-------------------Fin detectar nueva ventana de conversacion------------------//
 });
 
 
