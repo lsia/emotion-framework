@@ -1,0 +1,6 @@
+{
+  "name": "FacebookScrapper",
+  "description": "Esta extension es producto del laboratorio de sistemas inteligentes de la FIUBA",
+  "version": "1.0",
+  "main": "index.js"
+}
