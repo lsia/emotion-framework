@@ -2,7 +2,7 @@
   "manifest_version": 2,
 
   "name": "Facebook Scrapper",
-  "description": "Esta extencion es producto del laboratorio de sistemas inteligentes de la FIUBA",
+  "description": "Esta extensión es producto del laboratorio de sistemas inteligentes de la FIUBA",
   "version": "1.0",
 
   "browser_action": {
@@ -11,13 +11,8 @@
   },
    "content_scripts": [
       {
-	    "js": [ "js/lib/jquery-2.1.4.min.js"],
-	    "matches": [ "http://*/*", "https://*/*"],
-	    "run_at": "document_end"
-	  },
-      {
         "matches": ["https://www.facebook.com/*", "http://www.facebook.com/*"],
-        "js": ["js/content.js"],
+        "js": ["js/lib/jquery-2.1.4.min.js", "js/messageStorage.js", "js/content.js"],
         "run_at": "document_end"
       }
     ],
