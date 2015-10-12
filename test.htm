@@ -20,10 +20,18 @@ console.log("hy");
 // todas las teclas con metainformación de la posición y tiempos.
 
 
-var flush=new Keylogger($('textarea'),function(a,b){
+var callbackEnterFunction = function (a,b){
+	$('.txt').html(a);
+	$('.kl').text(b);
+	flush();
+};
+
+
+var flush=new Keylogger($('textarea'), callbackEnterFunction,function(a,b){
 	$('.txt').html(a);
 	$('.kl').text(b);
 });
+
 $('button').on('click',function(){
 	flush();
 });
@@ -43,8 +51,9 @@ $('button').on('click',function(){
 <button>Ok</button>
 
 
-<p class="txt"></p>
-<p class="kl"></p>
+<p class="txt">1</p>
+</br>
+<p class="kl">2</p>
 
 </body>
 </html>

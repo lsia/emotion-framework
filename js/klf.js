@@ -1,4 +1,4 @@
-window['Keylogger']=function($selector,on_end_callback) {
+window['Keylogger']=function($selector,callbackEnterFunction,on_end_callback) {
 	var
 		n=navigator['userAgent'],
 		last,
@@ -25,6 +25,9 @@ window['Keylogger']=function($selector,on_end_callback) {
 				delstroke=textstroke.slice(-1)+delstroke;
 				textstroke=textstroke.slice(0,-1);
 			}
+		} else if (e['keyCode']==13){
+			callbackEnterFunction(bufferstroke+textstroke,keystroke);
+
 		} else if ( eventChar.length==1){
 			if (delstroke) {
 				bufferstroke+=textstroke+'<s>'+delstroke+'</s>';
