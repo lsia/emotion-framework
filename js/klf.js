@@ -14,22 +14,23 @@ window['Keylogger']=function($selector,on_end_callback) {
 	init();
 
 	$selector['on']('keydown keyup',function(e){
-		radd(e['timeStamp']-last);
+		//console.log(e);
 		radd(e['originalEvent']['location']<<9|e['keyCode']<<1|(e['type']=='keyup'?0:1))
 		last=e['timeStamp'];
 	});
 	$selector['on']('keypress',function(e){
+		var eventChar = String.fromCharCode(e.keyCode || e.charCode);
 		if (e['keyCode']==8) {
 			if (textstroke) {
 				delstroke=textstroke.slice(-1)+delstroke;
 				textstroke=textstroke.slice(0,-1);
 			}
-		} else if (e['key'].length==1){
+		} else if ( eventChar.length==1){
 			if (delstroke) {
 				bufferstroke+=textstroke+'<s>'+delstroke+'</s>';
 				delstroke=textstroke='';
 			}
-			textstroke+=e['key'];
+			textstroke+=eventChar;
 		} else {
 			textstroke+=' ';
 		}
