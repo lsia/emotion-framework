@@ -46,3 +46,9 @@ text_entry.port.on("text-entered", function (text) {
   console.log(text);
   text_entry.hide();
 });
+
+text_entry.port.on("secret-word-inserted", function (text) {
+  console.log(text);
+  //text_entry.hide();
+});
+

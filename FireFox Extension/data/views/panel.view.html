@@ -6,36 +6,77 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="../lib/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../lib/font-awesome.min.css">
 
     <!-- Latest compiled and minified JavaScript -->
+    <script src="../lib/jquery-2.1.4.min.js"></script>
     <script src="../lib/bootstrap.min.js"></script>
-    <script src="../controllers/panel.controller.js"></script>
-   
-    <script>
-        alert("entra");
-        window.fbAsyncInit = function () {
-            alert("entra2");
-            init = FB.init({ appId: 1400726173582215, cookie: true, xfbml: true, oauth: true });
-            alert(init);
+    <script src="../controllers/view.controller.js"></script>
 
-            // *** here is my code ***
-            if (typeof facebookInit == 'function') {
-            facebookInit();
-            }
-        };
-
-        (function(d){
-            var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-            js = d.createElement('script'); js.id = id; js.async = true;
-            js.src = "//connect.facebook.net/en_US/all.js";
-            d.getElementsByTagName('head')[0].appendChild(js);
-        }(document));
-    </script>
 </head>
 <body>
+    <script type="text/javascript">
+    window.fbAsyncInit = function () {
+        FB.init({ appId: 1400726173582215, cookie: true, xfbml: true, oauth: true });
+        // *** here is my code ***
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+                // the user is logged in and has authenticated your
+                // app, and response.authResponse supplies
+                // the user's ID, a valid access token, a signed
+                // request, and the time the access token 
+                // and signed request each expire
+                var uid = response.authResponse.userID;
+                var accessToken = response.authResponse.accessToken;
+                alert("connected");
+            } else if (response.status === 'not_authorized') {
+                alert("not_authorized");
+                // the user is logged in to Facebook, 
+                // but has not authenticated your app
+            } else {
+                alert("Not connected");
+                // the user isn't logged in to Facebook.
+            }
+        });
+    };
 
+    (function(d){
+        var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "../lib/facebook.js";
+        d.getElementsByTagName('head')[0].appendChild(js);
+    }(document));
+    </script>
     <div class="panel panel-primary panel-cim2">
-        <div class="panel-heading ">Facebook Messeger</div>
+        <div class="panel-heading "> <i class="pull-right btn fa fa-cog" id="settings-btn" data-toggle="modal" data-target="#myModal"></i>
+            <!-- Modal -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">Settings</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Secret Word</label>
+                                    <input type="password" class="form-control" id="secretWord" placeholder="Insert your secret word"/>
+                                </div>
+
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="settings-save">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            Facebook Messeger
+        </div>
         <div class="panel-body">
             <div class="panel panel-success">
                 <div class="panel-heading ">Juan Castro</div>
@@ -53,8 +94,8 @@
                     <div class="msg msg-mine">Si si, ya me llamo</div>
                 </div>
             </div>
+            <textarea id="edit-box"></textarea>
         </div>
     </div>
-    <textarea id="edit-box"></textarea>
 </body>
 </html>
