@@ -12,7 +12,7 @@
    "content_scripts": [
       {
         "matches": ["https://www.facebook.com/*", "http://www.facebook.com/*"],
-        "js": ["js/lib/jquery-2.1.4.min.js", "js/messageStorage.js", "js/content.js"],
+        "js": ["js/lib/external/jquery-2.1.4.min.js", "js/messageStorage.js", "js/content.js", "js/lib/klf.js"],
         "run_at": "document_end"
       }
     ],
