@@ -40,6 +40,12 @@ $(document).ready(function() {
 
 	$("#chat-logger").load(chrome.extension.getURL("html/chat-logger.html"));
 
+	messageStorage.on('newMessage', function (event, message) {
+		
+
+    	$('#chat-logger-content').append("<p>"+message.text+"</p>");
+    	//console.log('Message saved event!', message.text);
+	});
 	//-------------------Detectar nueva ventana de conversacion------------------//
 	var target = $(".fbNubGroup")[0]; // Class del nodo a monitorear
 	
@@ -56,9 +62,10 @@ $(document).ready(function() {
 						var elem = node.getElementsByClassName("titlebarTextWrapper")[0];
 						if(elem.tagName == "H4"){
 							console.log( "Se inicia una nueva conversacion" );
-                                                        var flush=new Keylogger($(node).find("textarea"),function(a,b){
+                                                        var flush=new Keylogger($(node).find("textarea"),function(message,b){
                                                             // a es el texto para ser almacenado
-                                                            console.log("keyloguer function: "+a);
+                                                            console.log("keyloguer function: "+message);
+                                                            messageStorage.add({conversationId: 'some_conv_id', from: 'some_fb_id', to: 'some_other_fb_id', text: message});
                                                         });
 						}
 					}
