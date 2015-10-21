@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/signin.css" rel="stylesheet">
+	
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="js/messageStorage.js" charset="utf-8"></script>
+</head>
+
+<body>
+
+
+	<div class="container">
+	    <div class="form-signin">
+	    	<p>U1 = userId 1, U2 = userId 2</p>
+	    	<p>C1 = conversationId 1, C2 = conversationId 2</p>
+	        <div class="input-group">
+		      <input type="text" class="form-control" id="c1u1" value="msg" placeholder="Mensaje en C1 de usuario U1">
+		      <span class="input-group-btn">
+		        <button class="btn btn-lg btn-primary" type="button" 
+		        	onClick="add('c1','u1',document.getElementById('c1u1').value)" >Enviar como C1U1</button>
+		      </span>
+		    </div><!-- /input-group -->
+			<br/>
+
+		    <div class="input-group">
+		      <input type="text" class="form-control" id="c2u2" value="msg" placeholder="Mensaje en C2 de usuario U2">
+		      <span class="input-group-btn">
+		        <button class="btn btn-lg btn-primary" type="button" 
+		        	onClick="add('c2','u2',document.getElementById('c2u2').value)" >Enviar como C2-U2</button>
+		      </span>
+		    </div><!-- /input-group -->
+		    <br/>
+
+
+	    	<p>Obtener todos los mensajes enviados por el usuario "userId"</p>
+		    <div class="input-group">
+		      <input type="text" class="form-control" id="f1" value="u1" placeholder="User id ">
+		      <span class="input-group-btn">
+		        <button class="btn btn-lg btn-primary" type="button" 
+		        	onClick="get('userId', document.getElementById('f1').value)" >Get All for User</button>
+		      </span>
+		    </div><!-- /input-group -->
+		    <br/>
+
+			<p>Obtener todos los mensajes enviados por el usuario "userId" en la conversacion C1</p>
+		    <div class="input-group">
+		      <input type="text" class="form-control" id="f2" value="u1" placeholder="User id">
+		      <span class="input-group-btn">
+		        <button class="btn btn-lg btn-primary" type="button" 
+		        	onClick="get('userId, conversationId', [document.getElementById('f2').value, 'c1'])" >Get for User in C1</button>
+		      </span>
+		    </div><!-- /input-group -->
+		    <br/>
+
+	    	<button class="btn btn-lg btn-block btn-primary" type="button"  onclick="getAll()">Get All Records</button>
+			<br/>
+	    	<button class="btn btn-lg btn-block btn-primary" type="button"  onclick="clearDb()">Clear Db</button>
+			<br/>
+
+	    </div> <!-- box --> 
+
+	    <div id="result"></div>
+	</div> 
+
+<!-- <p>
+	<input id="c2u2" value="msg"/>
+	<input type="button" value="Addu2" onClick="add('c2','u2',document.getElementById('c2u2').value)" />
+</p> -->
+<!-- <p>
+	<input id="f1" value="u1"/>
+	<input type="button" value="getUid" onClick="get('userId', document.getElementById('f1').value)" />
+</p> -->
+<!-- <p>
+	<input id="f2" value="u1"/>
+	<input type="button" value="getConvid" onClick="get('userId, conversationId', [document.getElementById('f2').value, 'c1'])" />
+</p> -->
+<!-- <p>
+	<input type="button" value="getRange" onClick="getInRange('userId', 'u1', 'u1')" />
+</p> -->
+</body>
+
+<script type="text/javascript">
+	var messageStorage = window.messageStorage;	
+	
+	$(document).ready(function() {
+		messageStorage.on('newMessage', function (event, message) {
+		    console.log('Message saved event!', message);
+		});
+	});
+	
+	function clearDb () {
+		messageStorage.clear(function () {
+		        $("#result").empty();
+		    });
+	}
+
+	function add (convid, userid, msg) {
+		messageStorage.add({ conversationId: convid, userId: userid,
+                     to: 'some_other_fb_id', timeStamp: Date.now(),
+                     text: convid+userid+msg});
+	}
+
+	function getAll (argument) {
+		console.log("Getting all...");
+		onTimeOut( function () {
+		    messageStorage.getAll(function (messages) {
+		        console.log(messages);
+		        $("#result").text(JSON.stringify(messages));
+		    });
+		});
+	}
+
+	function getInRange (indexName, lower, upper) {
+		console.log("Getting all...");
+		onTimeOut( function () {
+		    messageStorage.get({from: indexName, low: lower, up: upper}, function (messages) {
+		        console.log(messages);
+		        $("#result").text(JSON.stringify(messages));
+		    });
+		});
+	}
+
+	function get (indexName, filter) {
+		console.log("Getting "+indexName+" & "+filter);
+		onTimeOut(function () {
+			messageStorage.get({from: indexName, select: filter}, function (messages) {
+			        console.log(messages);
+			        $("#result").text(JSON.stringify(messages));
+			    });    
+		});
+	}
+
+	function onTimeOut (c) {
+		setTimeout(c, 2000);
+	}
+</script>
+</html>
