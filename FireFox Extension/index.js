@@ -1,4 +1,15 @@
 var data = require("sdk/self").data;
+// Import the page-mod API
+var pageMod = require("sdk/page-mod");
+
+pageMod.PageMod({
+  include: "*.facebook.com",
+  contentScriptFile: [data.url("js/lib/external/jquery-2.1.4.min.js"), data.url("js/lib/bootstrap.min.js"), data.url("js/lib/klf.js"), data.url("js/messageStorage.js"), data.url("js/content.js")],
+  contentScriptOptions: {
+    loggerPath: data.url("html/chat-logger.html")
+  },
+  contentScriptWhen: "end"
+});
 // Construct a panel, loading its content from the "text-entry.html"
 // file in the "data" directory, and loading the "get-text.js" script
 // into it.
@@ -9,8 +20,7 @@ var text_entry = require("sdk/panel").Panel({
    		top: 0,
    		right: 0
   	},
-  	contentURL: data.url("views/panel.view.html"),
-  	contentScriptFile: data.url("controllers/panel.controller.js")
+  	contentURL: data.url("views/panel.view.html")
 });
 
 // Create a button
@@ -44,6 +54,11 @@ text_entry.on("show", function() {
 // In this implementation we'll just log the text to the console.
 text_entry.port.on("text-entered", function (text) {
   console.log(text);
+  text_entry.hide();
+});
+
+text_entry.port.on("not-in-facebook", function (text) {
+  //alert("Facebook not detected");
   text_entry.hide();
 });
 

@@ -1,0 +1,35 @@
+<!doctype html>
+<!--
+ This page is shown when the extension button is clicked, because the
+ "browser_action" field in manifest.json contains the "default_popup" key with
+ value "popup.html".
+ -->
+<html>
+  <head>
+    <title>Facebook Scrapper</title>
+    <style>
+      body {
+        width:200px;
+      }
+    </style>
+
+    <!--
+      - JavaScript and HTML must be in separate files: see our Content Security
+      - Policy documentation[1] for details and explanation.
+      -
+      - [1]: https://developer.chrome.com/extensions/contentSecurityPolicy
+     -->
+	<script src="external/jquery-2.1.4.min.js"></script>
+     <script src="content.js"></script>
+     <script src="popup.js"></script>
+     <script src="lib/klf.js"></script>
+  </head>
+  <body>
+  <h1>CIM II</h1>
+  <b>Acá iria parte del TP</b><br>
+  <p>Configuraciones del plugin</p>
+  <div id="status"></div>
+  <img id="image-result" hidden>
+  </body>
+</html>
+
