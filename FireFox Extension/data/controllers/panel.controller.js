@@ -17,8 +17,12 @@ textArea.addEventListener('keyup', function onkeyup(event) {
 //
 // Set the focus to the text area so the user can
 // just start typing.
-self.port.on("show", function onShow() {
+self.port.on("show", function onShow(obj) {
   textArea.focus();
+});
+
+self.port.on("not-in-facebook", function noFB() {
+  alert("Not in facebook.");
 });
 
 
