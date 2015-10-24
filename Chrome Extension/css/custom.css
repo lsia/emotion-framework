@@ -1,0 +1,27 @@
+.panel-cim2{
+	height: 100% !important;
+}
+.msg{
+	font-size: 12px;
+	font-family: Courier;
+}
+
+.msg-others{
+	text-align: left;
+	border: 1px solid #f6f7f8;
+	background-color: #f6f7f8;
+	left: 0;
+}
+.msg-mine{
+	text-align: right;
+	border: 1px solid #dbedfe;
+	background-color: #dbedfe;
+	right: 0;
+}
+
+.modal-title{
+	color: black;
+}
+.modal-body{
+	color: black;
+}
