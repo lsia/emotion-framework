@@ -1,5 +1,6 @@
 .panel-cim2{
 	height: 100% !important;
+	min-width: 300px;
 }
 .msg{
 	font-size: 12px;
@@ -13,7 +14,7 @@
 	left: 0;
 }
 .msg-mine{
-	text-align: right;
+	text-align: center;
 	border: 1px solid #dbedfe;
 	background-color: #dbedfe;
 	right: 0;
@@ -24,4 +25,12 @@
 }
 .modal-body{
 	color: black;
+}
+
+.btns-encuesta {
+	display: block;
+	text-align: right;
+}
+.btns-encuesta > input {
+	margin-left: 10px;
 }
